@@ -52,3 +52,32 @@
 </body>
 </html>
 
+
+JavaScript: 
+<script>
+  const modeToggle = document.getElementById("mode-toggle");
+  const body = document.body;
+
+  // Load saved mode from localStorage (so it remembers your mode)
+  const savedMode = localStorage.getItem("mode");
+  if (savedMode) {
+    body.classList.add(savedMode);
+    modeToggle.textContent = savedMode === "dark-mode" ? "Light Mode" : "Dark Mode";
+  } else {
+    body.classList.add("dark-mode"); // default
+    modeToggle.textContent = "Light Mode";
+  }
+
+  // Switch modes when clicked
+  modeToggle.addEventListener("click", () => {
+    if (body.classList.contains("dark-mode")) {
+      body.classList.replace("dark-mode", "light-mode");
+      modeToggle.textContent = "Dark Mode";
+      localStorage.setItem("mode", "light-mode");
+    } else {
+      body.classList.replace("light-mode", "dark-mode");
+      modeToggle.textContent = "Light Mode";
+      localStorage.setItem("mode", "dark-mode");
+    }
+  });
+</script>
