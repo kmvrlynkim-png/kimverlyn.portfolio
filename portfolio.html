@@ -83,8 +83,15 @@
 
 JavaScript: 
 <script>
- (function () {
-  const KEY = "site-color-mode"; // 'dark' | 'light'
+/* 1) Prevent flash: set initial class ASAP from saved preference */
+(function () {
+  var m = localStorage.getItem("site-color-mode");
+  document.documentElement.classList.add(m === "light" ? "light-mode" : "dark-mode");
+})();
+
+/* 2) Theme toggle + "JavaScript:" remover */
+(function () {
+  const KEY = "site-color-mode";     // 'dark' | 'light'
   const body = document.body;
 
   function apply(mode) {
@@ -94,14 +101,18 @@ JavaScript:
     if (btn) btn.textContent = body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
   }
 
-  // ensure button exists
   function ensureButton() {
     let btn = document.getElementById("mode-toggle");
     if (!btn) {
       btn = document.createElement("button");
       btn.id = "mode-toggle";
       btn.type = "button";
-      btn.textContent = "Dark Mode";
+      btn.textContent = "Dark Mode"; // will update after apply()
+      // inline position if you didn't style it in CSS
+      btn.style.position = "fixed";
+      btn.style.top = "12px";
+      btn.style.right = "12px";
+      btn.style.zIndex = "1000";
       document.body.appendChild(btn);
     }
     btn.onclick = () => {
@@ -111,14 +122,34 @@ JavaScript:
     };
   }
 
+  function removeJavaScriptLabels() {
+    const kills = new Set(["javascript:", "Javascript:", "JavaScript:", "JAVASCRIPT:"]);
+    document.querySelectorAll("body *").forEach(el => {
+      const txt = (el.textContent || "").trim();
+      if (kills.has(txt)) { el.remove(); return; }
+      el.childNodes.forEach(n => {
+        if (n.nodeType === 3 && kills.has((n.nodeValue || "").trim())) n.remove();
+      });
+    });
+  }
+
   const saved = localStorage.getItem(KEY);
-  const initial = saved === "light" || saved === "dark" ? saved : "dark";
+  const initial = (saved === "light" || saved === "dark") ? saved : "dark";
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => { apply(initial); ensureButton(); });
-  } else { apply(initial); ensureButton(); }
+    document.addEventListener("DOMContentLoaded", () => {
+      apply(initial);
+      ensureButton();
+      removeJavaScriptLabels();
+    });
+  } else {
+    apply(initial);
+    ensureButton();
+    removeJavaScriptLabels();
+  }
 })();
 </script>
+
 
 
 
