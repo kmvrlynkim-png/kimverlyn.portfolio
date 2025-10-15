@@ -106,23 +106,17 @@
 JavaScript: 
 <script>
 (function () {
-  const STORAGE_KEY = "site-color-mode"; // 'dark' or 'light'
+  const KEY = "site-color-mode"; // 'dark' | 'light'
   const body = document.body;
 
-  function applyMode(mode) {
+  function apply(mode) {
     body.classList.remove("dark-mode", "light-mode");
     body.classList.add(mode === "light" ? "light-mode" : "dark-mode");
-    updateButtonText();
-  }
-
-  function updateButtonText() {
     const btn = document.getElementById("mode-toggle");
-    if (!btn) return;
-    const inDark = body.classList.contains("dark-mode");
-    btn.textContent = inDark ? "Light Mode" : "Dark Mode";
+    if (btn) btn.textContent = body.classList.contains("dark-mode") ? "Light Mode" : "Dark Mode";
   }
 
-  // Create the button if it's missing
+  // ensure button exists
   function ensureButton() {
     let btn = document.getElementById("mode-toggle");
     if (!btn) {
@@ -130,37 +124,24 @@ JavaScript:
       btn.id = "mode-toggle";
       btn.type = "button";
       btn.textContent = "Dark Mode";
-      btn.style.position = "fixed";
-      btn.style.top = "10px";
-      btn.style.left = "10px";
-      btn.style.zIndex = "1000";
-      document.body.prepend(btn);
+      document.body.appendChild(btn);
     }
-    btn.addEventListener("click", () => {
+    btn.onclick = () => {
       const next = body.classList.contains("dark-mode") ? "light" : "dark";
-      applyMode(next);
-      localStorage.setItem(STORAGE_KEY, next);
-    });
+      localStorage.setItem(KEY, next);
+      apply(next);
+    };
   }
 
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = localStorage.getItem(KEY);
   const initial = saved === "light" || saved === "dark" ? saved : "dark";
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      applyMode(initial);
-      ensureButton();
-    });
-  } else {
-    applyMode(initial);
-    ensureButton();
-  }
-})();
-  });
 
-  // Keep text correct after DOM is ready
-  document.addEventListener("DOMContentLoaded", updateButtonText);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => { apply(initial); ensureButton(); });
+  } else { apply(initial); ensureButton(); }
 })();
 </script>
+
 
 
 
