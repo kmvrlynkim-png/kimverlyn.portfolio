@@ -1,6 +1,6 @@
 /* BODY STYLING */
 body {
-   background-image: url("bgPortfolio.jpg");
+  background-image: url("bgPortfolio.jpg");
   background-size: cover;           /* Cover entire screen */
   background-repeat: no-repeat;     /* Don’t tile it */
   background-position: center;      /* Center the image */
@@ -142,8 +142,49 @@ button {
 button:hover {
   background-color: #444;
 }
+
 h1, h2 {
   font-size: 50px;
   font-weight: bold;
   margin: 40px 0 20px;
+}
+
+/* ========================= */
+/*   DARK/LIGHT MODE ADDON   */
+/* ========================= */
+
+/* Toggle button */
+#mode-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 8px 15px;
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1000;
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-image: url("darkbackground.png");
+  color: white;
+}
+
+/* Light mode */
+body.light-mode {
+  background-image: url("lightbackground.png");
+  color: black;
+}
+
+/* Optional: nav link contrast in light mode */
+body.light-mode nav a {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #000;
+  text-shadow: none;
+}
+body.light-mode nav a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
