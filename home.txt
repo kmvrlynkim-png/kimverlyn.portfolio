@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kimverlyn Luab</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    img {
+      width: 150px; /* approximate 2x2 size in pixels */
+      height: 150px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+  </style>
+</head>
+<body>
+  <img src="KimPic.jpg" alt="Kimverlyn Luab 2x2 Photo">
+  <h1>Kimverlyn Luab</h1>
+  <p>Bachelor of Science in Information Technology</p>
+</body>
+</html>
