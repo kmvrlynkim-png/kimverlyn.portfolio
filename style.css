@@ -1,6 +1,6 @@
 /* BODY STYLING */
 body {
-   background-image: url("bgPortfolio.jpg");
+  background-image: url("bgPortfolio.jpg");
   background-size: cover;           /* Cover entire screen */
   background-repeat: no-repeat;     /* Don’t tile it */
   background-position: center;      /* Center the image */
@@ -26,15 +26,20 @@ nav {
   background: none;
   backdrop-filter: none;
   padding: 20px 0;
-  z-index: 999;             /* Ensure it stays above content */
+  z-index: 999;                     /* Ensure it stays above content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
 }
 
+/* nav links */
 nav a {
   display: inline-block;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 6px;
   padding: 10px 15px;
   font-weight: bold;
   border-radius: 5px;
@@ -48,16 +53,14 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
-/* HEADINGS AND TEXT */
-h1 {
-  font-size: 50px;
-  margin-bottom: 10px;
-}
+/* Spacer so toggle can sit on the right if desired */
+nav .spacer { flex: 1; }
 
-p {
-  font-size: 24px;
-  margin: 10px 0;
-}
+/* HEADINGS AND TEXT */
+h1 { font-size: 50px; margin-bottom: 10px; }
+h2 { font-size: 50px; font-weight: bold; margin: 40px 0 20px; }
+
+p { font-size: 24px; margin: 10px 0; }
 
 section p {
   font-size: 18px;
@@ -66,7 +69,7 @@ section p {
 }
 
 /* PROFILE IMAGE */
-img {
+img.profile {
   width: 150px;
   height: 150px;
   border-radius: 8px;
@@ -76,19 +79,12 @@ img {
 }
 
 /* LIST STYLING - REMOVE BULLETS */
-.skills-list,
-.gains-list,
-ul {
+.skills-list, .gains-list, ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-.skills-list li,
-.gains-list li,
-ul li {
-  margin-bottom: 10px;
-}
+.skills-list li, .gains-list li, ul li { margin-bottom: 10px; }
 
 /* CONTACT FORM STYLES */
 .contact-form {
@@ -98,7 +94,6 @@ ul li {
   justify-content: center;
   margin-top: 50px;
 }
-
 form {
   display: flex;
   flex-direction: row;
@@ -107,7 +102,6 @@ form {
   width: 80%;
   max-width: 900px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -115,19 +109,13 @@ form {
   margin-bottom: 15px;
   width: 30%;
 }
-
-label {
-  margin-bottom: 5px;
-}
-
-input,
-textarea {
+label { margin-bottom: 5px; }
+input, textarea {
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -138,29 +126,29 @@ button {
   cursor: pointer;
   margin-left: 20px;
 }
+button:hover { background-color: #444; }
 
-button:hover {
-  background-color: #444;
-}
-h1, h2 {
-  font-size: 50px;
-  font-weight: bold;
-  margin: 40px 0 20px;
-}
+/* ========================= */
+/*   DARK/LIGHT MODE ADDON   */
+/* ========================= */
 
-/* Default button style */
+/* Toggle button (default) */
 #mode-toggle {
-  position: fixed;
+  position: fixed;      /* keep visible on all pages */
   top: 10px;
   left: 10px;
   padding: 8px 15px;
-  background-color: #fff;
+  background-color: #fff;   /* default is white in light mode */
+  color: #000;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   z-index: 1000;
+  transition: filter 0.2s ease;
 }
+#mode-toggle:hover { filter: brightness(0.95); }
+#mode-toggle:focus { outline: 2px solid rgba(0,0,0,0.3); outline-offset: 2px; }
 
 /* Dark mode styles */
 body.dark-mode {
@@ -173,3 +161,21 @@ body.light-mode {
   background-image: url("lightbackground.png");
   color: black;
 }
+
+/* Button color per mode */
+body.light-mode #mode-toggle {
+  background-color: #fff;   /* original white */
+  color: #000;
+}
+body.dark-mode #mode-toggle {
+  background-color: #87CEEB;  /* sky blue in dark mode */
+  color: #000;
+}
+
+/* Optional: nav link contrast in light mode */
+body.light-mode nav a {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #000;
+  text-shadow: none;
+}
+body.light-mode nav a:hover { background-color: rgba(0, 0, 0, 0.1); }
