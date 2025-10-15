@@ -4,7 +4,8 @@
   <meta charset="UTF-8" /> <!-- Sets character encoding -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Ensures mobile responsiveness -->
   <title>About Me – Kimverlyn Luab</title>
-
+  <script src="theme.js" defer></script>
+  
   <!-- Link to external CSS file -->
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -16,7 +17,7 @@
     <a href="aboutme.html">About Me</a> |
     <a href="portfolio.html">Portfolio</a> |
     <a href="contact.html">Contact</a>
-    <button id="mode-toggle">Dark Mode</button>
+   <button id="mode-toggle" aria-label="Toggle color mode">Dark Mode</button>
   </nav>
 
   <main>
@@ -139,4 +140,5 @@ JavaScript:
   document.addEventListener("DOMContentLoaded", updateButtonText);
 })();
 </script>
+
 
