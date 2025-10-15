@@ -1,14 +1,13 @@
-/* ====== GLOBAL / BASE ====== */
+/* ===== Base ===== */
+* { box-sizing: border-box; }
 body {
-  /* Default to dark-mode look; JS will swap classes on load */
   margin: 0;
   min-height: 100vh;
-  padding-top: 100px;            /* so content doesn't hide behind nav */
+  padding-top: 90px;                 /* keep content below nav */
   font-family: Arial, sans-serif;
   text-align: center;
-  color: #fff;
 
-  /* Background settings shared by both themes */
+  /* shared bg settings */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -19,60 +18,67 @@ body {
   align-items: center;
 }
 
-/* ====== THEME BACKGROUNDS ====== */
-/* Dark theme uses your DarkbgPortfolio.jpg */
+/* ===== Backgrounds by theme ===== */
 body.dark-mode {
   background-image: url("DarkbgPortfolio.jpg");
   color: #fff;
 }
-
-/* Light theme uses your LightBG.png */
 body.light-mode {
   background-image: url("LightBG.png");
   color: #000;
 }
 
-/* ====== NAV ====== */
+/* ===== Nav ===== */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  text-align: center;
-  background: none;
-  backdrop-filter: none;
-  padding: 20px 0;
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 10px;
+  padding: 16px 12px;
+  background: rgba(0,0,0,0.25);
   z-index: 999;
 }
-
 nav a {
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  text-decoration: none;
-  margin: 0 10px;
-  padding: 10px 15px;
-  font-weight: bold;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  background: rgba(0,0,0,0.6);
+  color: #fff; text-decoration: none; font-weight: bold;
+  padding: 8px 12px; border-radius: 6px;
+  transition: transform .15s, background-color .25s;
 }
-nav a:hover { background-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+nav a:hover { transform: translateY(-2px); background: rgba(255,255,255,0.2); }
 
-/* Improve contrast in light mode */
-body.light-mode nav a {
-  background-color: rgba(255, 255, 255, 0.85);
-  color: #000;
-  text-shadow: none;
-}
-body.light-mode nav a:hover { background-color: rgba(0,0,0,0.1); }
+/* Light-mode contrast */
+body.light-mode nav { background: rgba(255,255,255,0.35); }
+body.light-mode nav a { background: rgba(255,255,255,0.9); color: #000; }
+body.light-mode nav a:hover { background: rgba(0,0,0,0.1); }
 
-/* ====== HEADINGS / TEXT ====== */
-h1 { font-size: 50px; margin-bottom: 10px; }
+/* ===== Headings ===== */
+h1 { margin: 8px 0 12px; font-size: 40px; }
 h2 { font-size: 50px; font-weight: bold; margin: 40px 0 20px; }
-p  { font-size: 24px; margin: 10px 0; }
-section p { font-size: 18px; margin: 20px auto; width: 80%; }
 
-/* ====== PROFILE IMAGE (default) ====== */
+/* ===== Center all paragraphs (and keep them readable) ===== */
+p,
+.section-card p,
+.about-section p {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+  line-height: 1.6;
+}
+/* Force-center if any inline style set it left */
+p[style*="text-align:left"] { text-align: center !important; }
+
+/* ===== Content card (optional translucent panel) ===== */
+.section-card {
+  width: min(960px, 92%);
+  margin: 24px auto;
+  padding: 24px;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+}
+body.dark-mode  .section-card { background: rgba(0,0,0,0.35); color: #fff; }
+body.light-mode .section-card { background: rgba(255,255,255,0.85); color: #000; }
+
+/* ===== Profile / images ===== */
 img.profile {
   width: 150px;
   height: 150px;
@@ -82,68 +88,50 @@ img.profile {
   border: 3px solid #fff;
 }
 
-/* Exact 2×2 in image (combine with .profile) */
+/* Exact 2×2 inch image */
 .img-2x2 {
-  width: 2in;
-  height: 2in;
+  width: 2in !important;
+  height: 2in !important;
   object-fit: cover;
   border-radius: 8px;
   border: 3px solid #fff;
   display: block;
-  margin: 0 auto;
+  margin: 12px auto;
 }
 @media print {
   .img-2x2 { width: 2in !important; height: 2in !important; }
 }
 
-/* ====== LISTS ====== */
+/* ===== Lists ===== */
 .skills-list, .gains-list, ul { list-style: none; padding: 0; margin: 0; }
 .skills-list li, .gains-list li, ul li { margin-bottom: 10px; }
 
-/* ====== CONTACT FORM ====== */
-.contact-form {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  margin-top: 50px;
-}
-form {
-  display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;
-  width: 80%; max-width: 900px;
-}
-.form-group {
-  display: flex; flex-direction: column;
-  margin-right: 20px; margin-bottom: 15px; width: 30%;
-}
-label { margin-bottom: 5px; }
+/* ===== Forms ===== */
+form { width: min(800px, 92%); margin: 0 auto; }
 input, textarea {
-  padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px; border: 1px solid #ccc;
+  margin: 8px 0;
+  background: rgba(255,255,255,0.9);
+}
+body.dark-mode input, body.dark-mode textarea {
+  background: rgba(0,0,0,0.35);
+  color: inherit; border: 1px solid rgba(255,255,255,0.25);
 }
 button {
-  padding: 10px 20px; font-size: 16px; background-color: #222; color: #fff;
+  padding: 10px 20px; font-size: 16px;
+  background-color: #222; color: #fff;
   border: none; border-radius: 4px; cursor: pointer; margin-left: 20px;
 }
 button:hover { background-color: #444; }
 
-/* Optional translucent content card (like your contact screenshot) */
-.section-card {
-  max-width: 960px; margin: 40px auto; padding: 24px;
-  border-radius: 12px; backdrop-filter: blur(2px);
-}
-body.dark-mode  .section-card { background: rgba(0,0,0,0.35); color: #fff; }
-body.light-mode .section-card { background: rgba(255,255,255,0.85); color: #000; }
-.section-card input, .section-card textarea { background: rgba(0,0,0,0.25); border: 0; color: inherit; }
-body.light-mode .section-card input, body.light-mode .section-card textarea { background: rgba(0,0,0,0.05); }
-.section-card button[type="submit"] { background: #fff; color: #000; border: 0; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
-
-/* ====== THEME TOGGLE BUTTON ====== */
+/* ===== Toggle button ===== */
 #mode-toggle {
-  position: fixed; top: 10px; left: 10px;
-  padding: 8px 15px;
-  background-color: #fff; color: #000;
-  border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
-  z-index: 1000; transition: filter 0.2s ease;
+  position: fixed; top: 12px; right: 12px;
+  padding: 8px 14px; border: none; border-radius: 8px;
+  font-weight: bold; cursor: pointer; z-index: 1000;
+  background: #fff; color: #000; transition: filter .2s;
 }
 #mode-toggle:hover { filter: brightness(0.95); }
-
-/* Button color per mode */
-body.light-mode #mode-toggle { background-color: #fff; color: #000; }
-body.dark-mode  #mode-toggle { background-color: #87CEEB; color: #000; }
+body.dark-mode #mode-toggle { background: #87CEEB; color: #000; } /* sky blue */
